@@ -16,6 +16,7 @@
 
     </dl>
 
+    <% if @photo.user_id == current_user.id %>
     <div class="btn-group btn-group-justified">
       <a href="/photos" class="btn btn-primary">
         Back
@@ -27,5 +28,12 @@
         Delete
       </a>
     </div>
+    <% else %>
+    <div class="btn-group btn-group-justified">
+      <a href="/photos" class="btn btn-primary">
+        Back
+      </a>
+    </div>
+    <% end %>
   </div>
 </div>

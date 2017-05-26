@@ -1,22 +1,10 @@
-<!-- Users show page -->
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="jumbotron">
-      <h3>
-        <%= @user.username %>
-      </h3>
-    </div>
-  </div>
-</div>
-
-<% @photos.each do |photo|%>
+<% @my_likes.each do |photo|%>
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <%= @user.username %>
+            <%= photo.user.username %>
             <small>
               <%= time_ago_in_words(photo.created_at) %>
             </small>

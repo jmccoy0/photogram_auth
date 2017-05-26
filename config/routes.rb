@@ -60,7 +60,11 @@ Rails.application.routes.draw do
   # Routes for Users
   # READ
   get "/users", :controller => "users", :action => "index"
-  get "users/:id", :controller => "users", :action => "show"
+  get "/users/:id", :controller => "users", :action => "show"
+
+  # Routes for My Likes
+  # READ
+  get "/my_likes", :controller => "mylikes", :action => "show"
 
 
 end

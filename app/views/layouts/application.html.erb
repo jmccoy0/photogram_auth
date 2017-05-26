@@ -48,6 +48,10 @@
             <li><a href="/users/<%= current_user.id %>">My Wall</a></li>
             <% else %>
             <% end %>
+          <% if current_user != nil  %>
+            <li><a href="/my_likes">My Likes</a></li>
+            <% else %>
+            <% end %>
           <li><a href="/rails/info">Sitemap</a></li>
         </ul>
 
