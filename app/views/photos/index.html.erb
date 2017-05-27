@@ -15,7 +15,7 @@
           <h3 class="panel-title">
             <%= photo.user.username %>
             <small>
-              <%= time_ago_in_words(photo.created_at) %>
+              <%= time_ago_in_words(photo.created_at) %> ago
             </small>
           </h3>
         </div>
@@ -26,18 +26,22 @@
           </a>
 
           <p>
-            <form>
-              <% if current_user.liked_photos.ids.include? photo.id %>
+            <% if current_user.liked_photos.ids.include? photo.id %>
+              <form>
                 <button class="btn btn-link">
                   <i class="fa fa-heart"></i>
                 </button>
+              </form>
               <% else %>
-                <button class="btn btn-link">
-                  <i class="fa fa-heart-o"></i>
-                </button>
-              <% end %>
-            <!-- if statement here for 1st to like -->
-            </form>
+                <form>
+                  <button class="btn btn-link">
+                    <i class="fa fa-heart-o"></i>
+                  </button>
+                </form>
+            <% end %>
+            <% if photo.likes.empty? %>
+              <small class="text-muted">be the first to like this</small>
+            <% end %>
           </p>
 
           <ul class="media-list">
@@ -46,7 +50,7 @@
                 <h6 class="media-heading">
                   <a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a>
                   <small>
-                    <%= time_ago_in_words(photo.created_at) %>
+                    <%= time_ago_in_words(photo.created_at) %> ago
                   </small>
                 </h6>
                 <%= photo.caption %>
