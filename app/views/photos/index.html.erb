@@ -28,7 +28,7 @@
           <p>
             <% if current_user.liked_photos.ids.include? photo.id %>
               <form action="/delete_like/<%= photo.likes.find_by(:user_id => current_user.id).id %>">
-                
+
                 <!-- Label and input for like -->
                 <input type="hidden" id="like_id" name="like_id" value="<%= photo.likes.find_by(:user_id => current_user.id).id %>">
 
@@ -36,9 +36,6 @@
                   <i class="fa fa-heart"></i>
                 </button>
 
-                <% if photo.likes.empty? %>
-                  <small class="text-muted">be the first to like this</small>
-                  <% else %>
                     <% if photo.likes.ids.count>1 %>
                       <% photo.likes.pluck(:user_id).each do |like| %>
                       <%= @users.find_by(:id => like).username %>,
@@ -50,9 +47,10 @@
                       <% end %>
                       likes this
                     <% end %>
-                <% end %>
               </form>
+
               <% else %>
+
               <form action="/create_like" method="post">
                 <!-- Hidden input for authenticity token to protect from forgery -->
                 <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -136,7 +134,7 @@
                   <div class="input-group">
                     <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment...">
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">
+                      <button class="btn btn-default">
                         <i class="fa fa-commenting-o"></i>
                       </button>
                     </span>
@@ -146,6 +144,23 @@
             </li>
           </ul>
         </div>
+
+            <% if photo.user_id == current_user.id %>
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <div class="btn-group btn-group-justified">
+                    <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
+                      <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">
+                      <i class="fa fa-trash-o"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <% else %>
+            <% end %>
+
       </div>
     </div>
   </div>
